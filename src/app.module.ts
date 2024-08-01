@@ -1,3 +1,5 @@
+import { UserModule } from './modules/user/user.module';
+import { AuthModule } from './auth/auth.module';
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -22,10 +24,13 @@ import { ConfigModule } from '@nestjs/config';
         enableArithAbort: true,
         encrypt: false,
       },
-    })],
+    }),
+    AuthModule,
+    UserModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {
-  constructor(private dataSource: DataSource){}
+  constructor(private dataSource: DataSource) {}
 }
