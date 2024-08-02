@@ -4,6 +4,7 @@ import { User } from '../model/user.interface';
 import { catchError, map, Observable, of } from 'rxjs';
 import { ApiTags } from '@nestjs/swagger';
 import { CreateUserDto } from '../dto/createUser.request.dto';
+import { LoginDto } from '../dto/login.request.dto';
 
 @ApiTags('User')
 @Controller('user')
@@ -20,8 +21,8 @@ export class UserController {
     }
 
     @Post('login')
-    login(@Body() user: User): Observable<Object> {
-        return this.userService.login(user).pipe(
+    login(@Body() dto: LoginDto): Observable<Object> {
+        return this.userService.login(dto).pipe(
             map((jwt: string) => {
                 return { accessToken: jwt }
             })

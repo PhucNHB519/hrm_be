@@ -15,6 +15,14 @@ async function bootstrap() {
     .setDescription('The API description')
     .setVersion('1.0')
     .addTag('User')
+    .addBearerAuth(
+      {
+        type: 'http',
+        scheme: 'bearer',
+        bearerFormat: 'JWT',
+      },
+      'accessToken', // This is the name of the security scheme you can use later
+    )
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
@@ -24,6 +32,6 @@ async function bootstrap() {
   if (module.hot) {
     module.hot.accept();
     module.hot.dispose(() => app.close());
-  } 
+  }
 }
 bootstrap();

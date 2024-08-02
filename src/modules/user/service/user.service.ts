@@ -6,6 +6,7 @@ import { User } from '../model/user.interface';
 import { catchError, from, map, Observable, switchMap, throwError } from 'rxjs';
 import { AuthService } from 'src/auth/service/auth.service';
 import { CreateUserDto } from '../dto/createUser.request.dto';
+import { LoginDto } from '../dto/login.request.dto';
 
 @Injectable()
 export class UserService {
@@ -15,8 +16,8 @@ export class UserService {
     private authService: AuthService,
   ) {}
 
-  login(user: User): Observable<string> {
-    return this.validateUser(user.username, user.password).pipe(
+  login(dto: LoginDto): Observable<string> {
+    return this.validateUser(dto.email, dto.password).pipe(
       switchMap((user: User) => {
         if (user) {
           return this.authService
