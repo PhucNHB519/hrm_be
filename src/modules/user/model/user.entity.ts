@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { UserBriefEntity } from 'src/modules/brief/model/userBrief.entity';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('User')
 export class UserEntity {
@@ -34,4 +35,7 @@ export class UserEntity {
 
   @Column()
   status: string;
+
+  @OneToMany(() => UserBriefEntity, userBrief => userBrief.user)
+  userBriefs: UserBriefEntity[];
 }
