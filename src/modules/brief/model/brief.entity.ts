@@ -12,13 +12,16 @@ export class BriefEntity {
   @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
   createdDate: Date;
 
-  @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
+  @Column({ type: 'datetime', nullable: true })
+  doneDate: Date;
+
+  @Column({ type: 'datetime', nullable: true })
   sentDate: Date;
 
-  @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
+  @Column({ type: 'datetime', nullable: true })
   endDate: Date;
 
-  @Column('nvarchar')
+  @Column({ type: 'nvarchar', nullable: true })
   content: string;
 
   @Column('nvarchar')
@@ -36,6 +39,6 @@ export class BriefEntity {
   @Column()
   status: string;
 
-  @OneToMany(() => UserBriefEntity, userBrief => userBrief.user)
+  @OneToMany(() => UserBriefEntity, (userBrief) => userBrief.user)
   userBriefs: UserBriefEntity[];
 }

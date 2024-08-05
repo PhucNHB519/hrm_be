@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Query, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query, Request, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { BriefService } from '../service/brief.service';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-guard';
 import { ApiTags } from '@nestjs/swagger';
@@ -24,8 +24,10 @@ export class BriefController {
   }
 
   @UseGuards(JwtAuthGuard)
+  @UsePipes(new ValidationPipe())
   @Post()
-  createBrief(@Body() dto: CreateBriefDto) {
-    return this.briefService.create(dto);
+  createBrief(@Request() req, @Body() dto: CreateBriefDto) {
+    const user = req.user;
+    return this.briefService.create(user, dto);
   }
 }

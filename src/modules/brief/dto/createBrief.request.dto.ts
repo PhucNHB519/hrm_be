@@ -4,13 +4,7 @@ export class CreateBriefDto {
 
   @ApiProperty()
   briefCode: string;
-
-  @ApiProperty()
-  endDate: Date;
-
-  @ApiProperty()
-  content: string;
-
+  
   @ApiProperty()
   phase: string;
 
