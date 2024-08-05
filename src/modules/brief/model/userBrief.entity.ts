@@ -16,3 +16,9 @@ export class UserBriefEntity {
     @ManyToOne(() => BriefEntity, brief => brief.userBriefs)
     brief: BriefEntity;
 }
+
+//user_brief:
+//- Người tạo
+//- Người đảm nhận
+//- Báo cáo lại
+//- Phê duyệt

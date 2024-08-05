@@ -15,6 +15,7 @@ async function bootstrap() {
     .setDescription('The API description')
     .setVersion('1.0')
     .addTag('User')
+    .addTag('Brief')
     .addBearerAuth(
       {
         type: 'http',
