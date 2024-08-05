@@ -15,14 +15,14 @@ import { UserBriefEntity } from '../model/userBrief.entity';
 import { User } from 'src/modules/user/model/user.interface';
 import { Brief } from '../model/brief.interface';
 import { UserBriefType } from 'src/common/constanst/enum';
+import { UserBriefService } from './userBrief.service';
 
 @Injectable()
 export class BriefService {
   constructor(
     @InjectRepository(BriefEntity)
     private readonly briefRepository: Repository<BriefEntity>,
-    @InjectRepository(UserBriefEntity)
-    private readonly userBriefRepository: Repository<UserBriefEntity>,
+    private userBriefService: UserBriefService
   ) {}
 
   //----- BRIEF -----
@@ -50,32 +50,11 @@ export class BriefService {
       });
 
       //create creator
-      await this.createUserBrief(user, newBrief, UserBriefType.CREATOR);
+      await this.userBriefService.createUserBrief(user, newBrief, UserBriefType.CREATOR);
 
       return newBrief;
     } catch (error) {
       Exception(error.message);
     }
   }
-
-  async send(id: string) {
-     return await this.briefRepository.update(id, {
-        
-     })
-  }
-
-  //----- USER BRIEF -----
-  async createUserBrief(user: User, brief: Brief, type: string) {
-    try {
-      return await this.userBriefRepository.save({
-        user: user,
-        brief: brief,
-        interactionType: type,
-      });
-    } catch (error) {
-      Exception(error.message);
-    }
-  }
-
-
 }

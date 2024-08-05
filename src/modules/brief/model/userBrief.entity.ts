@@ -18,7 +18,11 @@ export class UserBriefEntity {
 }
 //user_brief:
 //- Người tạo
-//- Người gửi
-//- Người đảm nhận
-//- Báo cáo lại
 //- Phê duyệt
+//- Báo cáo lại
+
+//processingStep
+//- Người gửi
+//- Được CC
+//- Người đảm nhận (hiện tại) cho 1 biến là isCurrent => receiver sẽ đảm nhận
+
